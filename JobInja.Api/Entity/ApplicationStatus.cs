@@ -1,6 +1,5 @@
 ﻿namespace JobInja.Api.Entities;
-
-public enum ApplicationStatus
+public enum ApplicationStatus 
 {
     Submitted = 1,
     Reviewed = 2,

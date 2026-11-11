@@ -17,7 +17,7 @@ public class ResumeEntityConfiguration : IEntityTypeConfiguration<Resume>
 
         builder.Property(x => x.FileName)
             .IsRequired()
-            .HasMaxLength(255);
+            .HasMaxLength(250);
         builder.Property(x => x.FilePath)
             .IsRequired()
             .HasMaxLength(500);

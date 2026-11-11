@@ -18,10 +18,19 @@ public class ApplicationDbContext : DbContext
     public DbSet<Resume> Resumes { get; set; } = null!;
     public DbSet<JobApplication> JobApplications { get; set; } = null!;
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.ClrType)
+                    .Property("DateCreated")
+                    .HasDefaultValueSql("GETDATE()");
+            }
+        }
     }
 }

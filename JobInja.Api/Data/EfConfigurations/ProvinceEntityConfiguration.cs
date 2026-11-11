@@ -7,7 +7,7 @@ namespace JobInja.Api.Data.EfConfigurations;
 
 public class ProvinceEntityConfiguration : IEntityTypeConfiguration<Province>
 {
-    
+    private static readonly DateTime SeedDate = new(2026, 1, 1);
 
     private static readonly string[] ProvinceNames =
     [
@@ -23,13 +23,19 @@ public class ProvinceEntityConfiguration : IEntityTypeConfiguration<Province>
     {
         builder.ToTable("Provinces");
 
-        builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
-        builder.HasIndex(x => x.Name).IsUnique();
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(100);
 
-        builder.HasData(ProvinceNames.Select((name, index) => new Province
+        builder.HasIndex(x => x.Name)
+            .IsUnique();
+
+        builder.HasData(ProvinceNames
+            .Select((name, index) => new Province
         {
             Id = index + 1,
             Name = name,
+            DateCreated = SeedDate
         }).ToArray());
     }
 }

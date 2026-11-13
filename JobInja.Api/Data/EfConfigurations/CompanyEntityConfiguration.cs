@@ -1,5 +1,4 @@
-﻿
-using JobInja.Api.Entities;
+﻿using JobInja.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,7 +12,7 @@ public class CompanyEntityConfiguration : IEntityTypeConfiguration<Company>
 
         builder.Property(x => x.Name)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(200);
 
         builder.Property(x => x.Description)
             .HasMaxLength(4000);

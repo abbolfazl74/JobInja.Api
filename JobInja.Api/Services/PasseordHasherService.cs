@@ -9,14 +9,14 @@ public class PasswordHasherService : IPasswordHasherService
     public string Hash(string password)
     {
         if (string.IsNullOrWhiteSpace(password))
-            throw new ArgumentNullException("password");
+            throw new ArgumentNullException(nameof(password));
 
-        return _passwordHasher.HashPassword(null, password);
+        return _passwordHasher.HashPassword(null!, password);
     }
 
-    public bool Verifiy(string passwordHash, string password)
+    public bool Verify(string passwordHash, string password)
     {
-        var result = _passwordHasher.VerifyHashedPassword(null, passwordHash, password);
+        var result = _passwordHasher.VerifyHashedPassword(null!, passwordHash, password);
         return result == PasswordVerificationResult.Success;
     }
 }

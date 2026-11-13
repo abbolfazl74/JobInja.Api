@@ -1,3 +1,4 @@
+
 using JobInja.Api.Data;
 using JobInja.Api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
+        
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -44,6 +47,11 @@ builder.Services.AddAuthentication()
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+
+await app.SeedAdminAsync();
+
+
 
 app.UseStaticFiles();
 
